@@ -53,7 +53,7 @@ class Phone {
                 System.exit(4);
             }
         } else if (input.equalsIgnoreCase("Ні")) {
-            System.out.println("Ти шо довбойоб?");
+            System.out.println("Відмова від реєстрації, завершую роботу");
             System.exit(6);
         } else {
             System.out.println("Введіть Так чи Ні");
