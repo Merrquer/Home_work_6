@@ -13,7 +13,7 @@ public class Home_Work_6_4 {
         Phone myPhone = new Phone(numberClient, operatorName);
         Network net1 = new Network(numberArray);
         net1.regInNet(myPhone, operatorName);
-        ;
+        myPhone.call(numberArray);
     }
 }
 
@@ -27,47 +27,35 @@ class Phone {
         this.operator = operator;
     }
 
-    public long[] regitser(long[] numberArray) {
+    public long[] regitser(long[] numberArray) {       //Метод перевіряє чи дійсно в номері телефона 9 цифр і видає список доступних номерів вибраного оператора
 
-        Scanner sc1 = new Scanner(System.in);
-        System.out.println("Хочете спробувати зареєструватись у мережі?");
-        String input = sc1.nextLine();
-        if (input.equalsIgnoreCase("Так")) {
-            for (int i = 0; i < numberArray.length; i++) {
-                if (number == numberArray[i]) {
-                    System.out.println("Номер вже зареєстрований");
-                    System.out.println("Список доступних номерів: ");
-                    for (int k = 0; k < numberArray.length; k++) {
-                        System.out.println(numberArray[i]);
-                    }
-                    return numberArray;
+        System.out.println("Спроба підключитись до мережі");
+        for (int i = 0; i < numberArray.length; i++)
+            if (number == numberArray[i]) {
+                System.out.println("Номер вже зареєстрований");
+                System.out.println("Список доступних номерів: ");
+                for (int k = 0; k < numberArray.length; k++) {
+                    System.out.println(numberArray[i]);
                 }
+                return numberArray;
             }
-            if (number / 10000000 > 0 & number / 100000000 < 10) {
-                long[] newArray = new long[numberArray.length + 1];
-                System.arraycopy(numberArray, 0, newArray, 0, numberArray.length);
-                newArray[newArray.length - 1] = number;
-                numberArray = newArray;
-                System.out.println("Реєстрація в мережі успішна");
-            } else {
-                System.out.println("Ви ввели некоректний номер телефону");
-                System.exit(4);
-            }
-        } else if (input.equalsIgnoreCase("Ні")) {
-            System.out.println("Відмова від реєстрації, завершую роботу");
-            System.exit(6);
+        if (number / 10000000 > 0 & number / 100000000 < 10) {
+            long[] newArray = new long[numberArray.length + 1];
+            System.arraycopy(numberArray, 0, newArray, 0, numberArray.length);
+            newArray[newArray.length - 1] = number;
+            numberArray = newArray;
+            System.out.println("Реєстрація в мережі успішна");
         } else {
-            System.out.println("Введіть Так чи Ні");
-            System.exit(5);
+            System.out.println("Ви ввели некоректний номер телефону");
+            System.exit(4);
         }
         System.out.println("Список доступних номерів: ");
 
-            Arrays.stream(numberArray).filter(i -> i != 0).forEach(System.out::println);
-
+        Arrays.stream(numberArray).filter(i -> i != 0).forEach(System.out::println);
         return numberArray;
     }
 
-    public void call(long[] numberArray) {
+    public void call(long[] numberArray) {                  //Метод "дзвонить" на номер телефону який введе користувач
         Scanner sc1 = new Scanner(System.in);
         System.out.println("На який номер бажаєте подзвонити?");
         long numberToCall = sc1.nextLong();
@@ -86,7 +74,6 @@ class Phone {
             System.exit(3);
         }
     }
-
 }
 
 class Network {
@@ -95,9 +82,7 @@ class Network {
 
     public Network(long[] numbersArray) {
         this.numbersArray = numbersArray;
-
     }
-
     public void regInNet(Phone phone, String operatorName) {
         long[] vodafoneArray = new long[5];
         long[] kiyvstarArray = new long[5];
@@ -105,7 +90,6 @@ class Network {
         int k = 0;
         int j = 0;
         int g = 0;
-        long[] newArray1;
         for (int i = 0; i < numbersArray.length; i++) {
             float coef = numbersArray[i] / 10000000;
             if (coef >= 66 & coef <= 67 || coef >= 50 & coef <= 51 || coef >= 95 & coef <= 96) {   //Заполнение массива с номерами водафон
@@ -127,8 +111,5 @@ class Network {
         } else if (operatorName.equalsIgnoreCase("Lifecell")) {
             phone.regitser(lifecellArray);
         }
-
     }
-
-
 }
