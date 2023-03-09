@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Home_Work_6_4 {
@@ -60,9 +61,9 @@ class Phone {
             System.exit(5);
         }
         System.out.println("Список доступних номерів: ");
-        for (int i = 0; i < numberArray.length; i++) {
-            System.out.println(numberArray[i]);
-        }
+
+            Arrays.stream(numberArray).filter(i -> i != 0).forEach(System.out::println);
+
         return numberArray;
     }
 
